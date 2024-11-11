@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout Page</title>
+    <link rel="stylesheet" href="./signout.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Thank You for Using Skipper's Asset Management Portal</h1>
+        </header>
+        <main>
+            <section class="form-section">
+                <h2>Logout Successful</h2>
+                <p>You have been successfully logged out.</p>
+                <button id="loginBtn" class="registerbtn">Return to Login</button>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', function () {
+            window.location.href = '/signinUser';
+        });
+    </script>
+</body>
+
+</html>
