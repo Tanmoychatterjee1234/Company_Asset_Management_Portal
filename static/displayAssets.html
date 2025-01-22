@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Assets</title>
+    <link rel="stylesheet" href="./styles_displayAsset.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="./logoSkipper.png" alt="Skipper logo" id="skipperLogo">
+            <h1>Welcome to Skipper's Asset Management Portal</h1>
+            <i class="fa fa-home" id="home"></i>
+        </header>
+        <main>
+            <section class="tabs">
+                <div id="downloadTab" class="tab active-tab" onclick="showForm('downloadForm')">Download Assets</div>
+                <div id="displayTab" class="tab" onclick="showForm('displayForm')">Display Assets</div>
+            </section>
+            <section id="downloadFormSection" class="form-section active-form">
+                <form id="downloadForm" autocomplete="off">
+                    <div class="options">
+                        <h3>Download Assets</h3>
+                        <label for="subLocation">Sub Location:</label>
+                        <select name="subLocation" id="subLocation">
+                            <option value="Tirumala Office" selected>Tirumala Office</option>
+                            <option value="Saltlake">Saltlake</option>
+                            <option value="New Delhi">New Delhi</option>
+                            <option value="Morigaon JJM">Morigaon JJM</option>
+                            <option value="Ahmedabad">Ahmedabad</option>
+                            <option value="Head Office">Head Office</option>
+                            <option value="Uluberia Plant">Uluberia Plant</option>
+                            <option value="BCTL UNIT">BCTL UNIT</option>
+                            <option value="Jangalpur Plant">Jangalpur Plant</option>
+                            <option value="Guwahati Plant">Guwahati Plant</option>
+                            <option value="Others">Others</option>
+                        </select>
+
+
+
+                        <label for="otherLocation" class="others" style="display: none;">Please specify the Sub
+                            Location:</label>
+                        <input type="text" class="others" name="otherLocation" id="otherLocation"
+                            style="display: none;">
+
+                        <button id="downloadAssetsButton">Download Asset Details</button>
+                </form>
+            </section>
+            <section id="displayFormSection" class="form-section">
+                <form id="displayForm" autocomplete="off">
+                    <h3>Display Assets</h3>
+                    <div class="column-selection">
+                        <h4>Select Columns to Display:</h4>
+                        <div class="checkbox-group">
+
+                            <label><input type="checkbox" class="column-checkbox" value="location" checked>
+                                Location</label>
+                            <label><input type="checkbox" class="column-checkbox" value="subLocation">
+                                Sub-Location</label>
+                            <label><input type="checkbox" class="column-checkbox" value="status" checked>
+                                Status</label>
+                            <label><input type="checkbox" class="column-checkbox" value="username"> Username</label>
+                            <label><input type="checkbox" class="column-checkbox" value="employeeId" checked>
+                                Employee
+                                ID</label>
+                            <label><input type="checkbox" class="column-checkbox" value="assetType" checked> Asset
+                                Type</label>
+                            <label><input type="checkbox" class="column-checkbox" value="assetMake"> Asset
+                                Make</label>
+                            <label><input type="checkbox" class="column-checkbox" value="assetSerialNumber" checked>
+                                Asset Serial Number</label>
+                            <label><input type="checkbox" class="column-checkbox" value="assetModel"> Asset
+                                Model</label>
+                            <label><input type="checkbox" class="column-checkbox" value="invoiceNumber"> Invoice
+                                Number</label>
+                            <label><input type="checkbox" class="column-checkbox" value="poNumber"> PO
+                                Number</label>
+                            <label><input type="checkbox" class="column-checkbox" value="amcInvoiceNumber"> AMC
+                                Invoice
+                                Number</label>
+                            <label><input type="checkbox" class="column-checkbox" value="warrantyStatus">
+                                Warranty
+                                Status</label>
+                            <label><input type="checkbox" class="column-checkbox" value="warrantyStartDate">
+                                Warranty Start Date</label>
+                            <label><input type="checkbox" class="column-checkbox" value="warrantyEndDate"> Warranty
+                                End Date</label>
+                            <label><input type="checkbox" class="column-checkbox" value="warrantyTenure"> Warranty
+                                Tenure</label>
+                            <label><input type="checkbox" class="column-checkbox" value="purchaseDate" checked>
+                                Purchase
+                                Date</label>
+                            <label><input type="checkbox" class="column-checkbox" value="purchaseYear"> Purchase
+                                Year</label>
+                            <label><input type="checkbox" class="column-checkbox" value="price"> Price</label>
+                            <label><input type="checkbox" class="column-checkbox" value="vendorName"> Vendor
+                                Name</label>
+                            <label><input type="checkbox" class="column-checkbox" value="contactNumber"> Vendor
+                                Contact Number</label>
+                            <label><input type="checkbox" class="column-checkbox" value="mailId"> Vendor Mail
+                                Id</label>
+                            <label><input type="checkbox" class="column-checkbox" value="processor">
+                                Processor</label>
+                            <label><input type="checkbox" class="column-checkbox" value="cpuSpeed"> CPU
+                                Speed</label>
+                            <label><input type="checkbox" class="column-checkbox" value="ramInstalled"> Ram
+                                Installed</label>
+                            <label><input type="checkbox" class="column-checkbox" value="hddCapacity"> HDD/SSD
+                                Capacity</label>
+                            <label><input type="checkbox" class="column-checkbox" value="operatingSystem"> Operating
+                                System</label>
+                            <label><input type="checkbox" class="column-checkbox" value="osLicense"> OS
+                                Licence</label>
+                        </div>
+                        <p class="column-limit-warning">You can view a maximum of 6 columns.</p>
+                    </div>
+                    <button id="displayAssetsButton">Display Assets</button>
+                </form>
+            </section>
+        </main>
+        <div id="result"></div>
+        <footer>
+            <div id="timemssge">
+                You will be auto logged out in <span id="timeOut"></span> seconds.
+            </div>
+            <p>&copy; 1981 Skipper Limited</p>
+        </footer>
+    </div>
+    <script>
+        var employeeName, subLocation, userType;
+        document.getElementById('skipperLogo').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+        document.getElementById('home').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const sessionResponse = await fetch('/sessionData');
+                const sessionData = await sessionResponse.json();
+                employeeName = sessionData.employeeName;
+                subLocation = sessionData.subLocation;
+                userType = sessionData.userType;
+                userStatus = sessionData.userStatus;
+                if (userStatus == 'Deactivated' || !sessionData.employeeName || !sessionData.employeeId || !sessionData.subLocation || !sessionData.userType) {
+                    alert("Your Session has expired. Please login again.");
+                    window.location.href = 'signin.html';
+                }
+                if (userStatus == 'Deactivated') {
+                    alert("User Deactivated. Please login again");
+                    window.location.href = 'signin.html';
+                }
+            } catch (error) {
+                console.error('Error fetching session data:', error);
+                window.location.href = 'signin.html';
+            }
+        });
+
+        var selectElement = document.getElementById('subLocation');
+        var otherLocationDiv = document.querySelectorAll('.others');
+        selectElement.addEventListener('change', function () {
+            if (selectElement.value === 'Others') {
+                otherLocationDiv.forEach(element => {
+                    element.style.display = 'block';
+                });
+            } else {
+                otherLocationDiv.forEach(element => {
+                    element.style.display = 'none';
+                });
+            }
+        });
+
+
+        document.getElementById('downloadAssetsButton').addEventListener('click', async function (event) {
+            event.preventDefault();
+            var subLocation_input = document.getElementById('subLocation').value;
+            if (document.getElementById('subLocation').value == 'Others') {
+                subLocation_input = document.getElementById('otherLocation').value;
+            }
+            else {
+                subLocation_input = document.getElementById('subLocation').value;
+            }
+            var response;
+            if ((userType == 'admin') || (subLocation_input == 'All Data' && userType == 'admin') || (subLocation_input == subLocation && userType == 'user')) {
+                try {
+                    response = await fetch(`/assets/downloadAssets/${subLocation_input}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    });
+                    if (response.ok) {
+                        const blob = await response.blob();
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.style.display = 'none';
+                        a.href = url;
+                        a.download = 'assets.xlsx';
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        a.remove();
+                    }
+                    else if (response.status == '404') {
+                        alert('No assets data of this particular location');
+                        return;
+                    }
+                    else {
+                        alert('Failed to download asset details, Error generating Excel file');
+                        return;
+                    }
+                }
+                catch (error) {
+                    console.error('Error downloading assets:', error);
+                    alert('Failed to download asset details, Error generating Excel file');
+                    return;
+                }
+            }
+            else if (userType == 'admin') {
+                alert('No assets data of this particular location');
+            }
+            else if (subLocation_input == 'All Data' && userType == 'user') {
+                alert('You cannot download all assets data, Please re-check your criteria');
+            }
+            else if (subLocation_input != subLocation && userType == 'user') {
+                alert('You cannot download assets data for this location, Please re-enter your sub-location');
+            }
+        });
+
+        document.getElementById('displayAssetsButton').addEventListener('click', async function (event) {
+            const selectedColumns = Array.from(document.querySelectorAll('.column-checkbox:checked')).map(checkbox => checkbox.value);
+            event.preventDefault();
+
+            try {
+                const response = await fetch('/assets/display', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+                if (selectedColumns.length > 6) {
+                    alert("You can view a maximum of 6 columns. Please de-select some columns");
+                    throw error;
+                }
+
+                const data = await response.json();
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '';
+
+                if (response.ok) {
+                    if (data.length > 0) {
+                        let tableHTML = `
+                            <table>
+                                <thead>
+                                    <tr>
+                        `;
+
+                        selectedColumns.forEach(column => {
+                            tableHTML += `<th>${column.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</th>`;
+                        });
+
+                        tableHTML += `
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+
+                        data.forEach(asset => {
+                            tableHTML += '<tr>';
+                            selectedColumns.forEach(column => {
+                                tableHTML += `<td>${asset[column] || ''}</td>`;
+                            });
+                            tableHTML += '</tr>';
+                        });
+
+                        tableHTML += `
+                                </tbody>
+                            </table>
+                        `;
+                        resultDiv.innerHTML = tableHTML;
+                    } else {
+                        resultDiv.innerHTML = '<p>No assets found.</p>';
+                    }
+                } else {
+                    resultDiv.innerHTML = `<p>${data.message || 'Failed to fetch asset details.'}</p>`;
+                }
+            }
+            catch (error) {
+                console.error('Error fetching asset:', error);
+                document.getElementById('result').innerHTML = '<p>Failed to fetch asset details.</p>';
+            }
+        });
+
+
+        // Switch between forms
+        function showForm(formId) {
+            // Hide all forms
+            const forms = document.querySelectorAll('.form-section');
+            forms.forEach(form => form.classList.remove('active-form'));
+
+            // Show selected form
+            document.getElementById(formId + 'Section').classList.add('active-form');
+
+            // Set active tab
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active-tab'));
+            var activeTab = "";
+            if (formId == 'displayForm') {
+                activeTab = "displayTab";
+            }
+            else if (formId == 'downloadForm') {
+                activeTab = "downloadTab";
+                document.getElementById("result").style.display = "none"
+            }
+            document.getElementById(activeTab).classList.add('active-tab');
+        }
+
+
+        var IdealTimeOut = 100;
+        var idleSecondsTimer = null;
+        var idleSecondsCounter = 0;
+        document.onclick = function () { idleSecondsCounter = 0; };
+        document.onmousemove = function () { idleSecondsCounter = 0; };
+        document.onkeypress = function () { idleSecondsCounter = 0; };
+        idleSecondsTimer = window.setInterval(CheckIdleTime, 1000);
+
+        function CheckIdleTime() {
+            idleSecondsCounter++;
+            var oPanel = document.getElementById("timeOut");
+            if (oPanel) {
+                oPanel.innerHTML = (IdealTimeOut - idleSecondsCounter);
+            }
+            if (idleSecondsCounter >= IdealTimeOut) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                alert("Your Session has expired. Please login again.");
+                window.location.href = "signin.html";
+            }
+        }
+
+        document.addEventListener("visibilitychange", function () {
+            if (idleSecondsCounter >= 80) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                window.location.href = "signin.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

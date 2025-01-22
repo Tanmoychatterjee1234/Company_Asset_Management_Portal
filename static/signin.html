@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./signin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to Skipper's Asset Management Portal</h1>
+        </header>
+        <main>
+            <section class="form-section">
+                <form id="loginForm" autocomplete="on">
+                    <h2>Login Form</h2>
+
+                    <label for="employeeId"><b>Employee Id:</b></label>
+                    <div class="input-container">
+                        <i class="fa fa-user icon" style="font-size:22px"></i>
+                        <input class="input-field" type="text" placeholder="" name="employeeId" id="employeeId"
+                            required>
+                    </div>
+
+                    <label for="pswd"><b>Password:</b></label>
+                    <div class="input-container">
+                        <i class="fa fa-key icon" style="font-size:22px"></i>
+                        <input class="input-field" type="password" placeholder="" name="pswd" id="pswd" required>
+                    </div>
+
+
+
+                    <label>
+                        <input type="checkbox" id="showPassword"
+                            onclick="togglePasswordVisibility('pswd', 'showPassword')"
+                            onchange="document.getElementById('pswd').type = this.checked ? 'text' : 'password'"> Show
+                        Password
+                    </label>
+
+                    <div class="buttons">
+                        <button type="submit" class="registerbtn" id="submitBtn">Login</button>
+                    </div>
+                    <p><a href="/forgot-password" id="forgotPasswordLink">Forgot Password?</a></p>
+                </form>
+            </section>
+        </main>
+    </div>
+    <script>
+
+        function togglePasswordVisibility(inputId, checkboxId) {
+            const input = document.getElementById(inputId);
+            const checkbox = document.getElementById(checkboxId);
+            input.setAttribute('type', checkbox.checked ? 'text' : 'password');
+        }
+
+        function verifyPassword() {
+            const pw = document.getElementById("pswd").value;
+
+
+            if (pw === "") {
+                alert("**Fill the password please!");
+                return false;
+            }
+
+            if (pw.length < 8) {
+                alert("**Password length must be at least 8 characters");
+                return false;
+            }
+
+            if (pw.length > 12) {
+                alert("**Password length must not exceed 12 characters");
+                return false;
+            }
+
+            return true;
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            if (!verifyPassword()) return;
+            
+
+            const formData = {
+                employeeId: document.getElementById('employeeId').value,
+                password: document.getElementById('pswd').value,
+            };
+
+            try {
+                const response = await fetch('/loginUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                var employeeId = document.getElementById('employeeId').value;
+                const result = await response.json();
+                if (response.ok) {
+                    window.location.href = 'home.html';
+                } else {
+                    alert("Invalid credentials, failed to find user");
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+
+</html>

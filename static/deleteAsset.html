@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Asset</title>
+    <link rel="stylesheet" href="./styles_deleteAsset.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="./logoSkipper.png" alt="Skipper logo" id="skipperLogo">
+            <h1>Welcome to Skipper's Asset Management Portal</h1>
+            <i class="fa fa-home" id="home"></i>
+        </header>
+        <main>
+            <section class="form-section">
+                <form id="deleteForm" autocomplete="off">
+                    <h3>Delete an Asset</h3>
+                    <label for="assetSerialNumber">Enter Asset Serial Number:</label>
+                    <input type="text" class="uppercase" id="assetSerialNumber" name="assetSerialNumber"
+                        placeholder="Enter Asset Serial Number" required>
+
+
+                    <button type="submit">Delete Asset</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <div id="timemssge">
+                You will be auto logged out in <span id="timeOut"></span> seconds.
+            </div>
+            <p>&copy; 1981 Skipper Limited</p>
+        </footer>
+    </div>
+
+    <script>
+        var employeeName, subLocation, userType;
+        document.getElementById('skipperLogo').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+        document.getElementById('home').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const sessionResponse = await fetch('/sessionData');
+                const sessionData = await sessionResponse.json();
+                employeeName = sessionData.employeeName;
+                subLocation = sessionData.subLocation;
+                userType = sessionData.userType;
+                userStatus = sessionData.userStatus;
+                if (!sessionData.employeeName || !sessionData.employeeId || !sessionData.subLocation || !sessionData.userType) {
+
+                    alert("Your Session has expired. Please login again.");
+                    window.location.href = 'signin.html';
+                }
+                if (userStatus == 'Deactivated') {
+
+                    alert("User Deactivated. Please login again");
+                    window.location.href = 'signin.html';
+                }
+                if (userType == 'user') {
+                    window.location.href = 'home.html';
+                }
+            } catch (error) {
+                console.error('Error fetching session data:', error);
+                window.location.href = 'signin.html';
+            }
+        });
+
+        document.getElementById('deleteForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            if (userType == 'admin') {
+                const assetSerialNumber = document.getElementById('assetSerialNumber').value;
+                var date = new Date();
+                var date_time = date.toLocaleDateString() + ' ' + date.toLocaleTimeString() + ' Deleted by ' + employeeName;
+
+                fetch('/sessionData')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.employeeName && data.employeeId && data.subLocation && data.userType) {
+                            if (data.subLocation == subLocation && userType == 'admin') {
+                                const subLocation = data.subLocation;
+                                try {
+                                    const response = fetch(`assets/delete/${assetSerialNumber}`, {
+                                        method: 'PUT',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({  "transactionDate": date_time, "userType": userType })
+                                    });
+                                    document.getElementById('deleteForm').reset();
+                                } catch (error) {
+                                    console.error('Error fetching asset:', error);
+                                }
+                            }
+                            else {
+                                alert("You cannot delete an asset of different location. Please re-enter your sublocation.");
+                            }
+                        }
+                    })
+                    .catch(err => console.error('Error fetching session data:', err));
+            }
+        });
+
+        var IdealTimeOut = 100;
+        var idleSecondsTimer = null;
+        var idleSecondsCounter = 0;
+        document.onclick = function () { idleSecondsCounter = 0; };
+        document.onmousemove = function () { idleSecondsCounter = 0; };
+        document.onkeypress = function () { idleSecondsCounter = 0; };
+        idleSecondsTimer = window.setInterval(CheckIdleTime, 1000);
+
+        function CheckIdleTime() {
+            idleSecondsCounter++;
+            var oPanel = document.getElementById("timeOut");
+            if (oPanel) {
+                oPanel.innerHTML = (IdealTimeOut - idleSecondsCounter);
+            }
+            if (idleSecondsCounter >= IdealTimeOut) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                alert("Your Session has expired. Please login again.");
+                window.location.href = "signin.html";
+            }
+        }
+
+        document.addEventListener("visibilitychange", function () {
+            if (idleSecondsCounter >= 80) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                window.location.href = "signin.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

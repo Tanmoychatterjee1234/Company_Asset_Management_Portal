@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="./styles_home.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="./logoSkipper.png" alt="Skipper logo" id="skipperLogo">
+            <div id="welcomeMessage"></div>
+            <nav>
+                <ul>
+                    <li id="home"><a href="home.html">Home</a></li>
+                    <li id="about"><a href="#">About</a></li>
+                    <li id="skipperLimited.com"><a href="https://www.skipperlimited.com/">skipperlimited.com</a></li>
+                    <li id="signin"><a href="signin.html">Sign In</a></li>
+                    <li id="signout"><a href="/logout">Sign Out</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="options">
+
+                <div class="option-card" id="ManagementOption">
+                    <img src="management.png" alt="User Management" class="option-icon">
+                    <button id="addUser">User Management</button>
+                </div>
+                <div class="option-card">
+                    <img src="add.png" alt="Add Asset" class="option-icon">
+                    <button id="addAsset">Add Asset</button>
+                </div>
+                <div class="option-card">
+                    <img src="search.png" alt="Search Asset" class="option-icon">
+                    <button id="searchAsset">Search Asset</button>
+                </div>
+                <div class="option-card">
+                    <img src="download.png" alt="Display Asset" class="option-icon">
+                    <button id="displayAsset">Display Assets</button>
+                </div>
+                <div class="option-card">
+                    <img src="update.png" alt="Update Asset" class="option-icon">
+                    <button id="updateAsset">Update Asset</button>
+                </div>
+                <div class="option-card" id="deleteOption">
+                    <img src="delete.png" alt="Delete Asset" class="option-icon">
+                    <button id="deleteAsset">Delete Asset</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div id="timemssge">
+                You will be auto logged out in <span id="timeOut"></span> seconds.
+            </div>
+            <p>&copy; 1981 Skipper. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const sessionResponse = await fetch('/sessionData');
+                const sessionData = await sessionResponse.json();
+                if (!sessionData.employeeName || !sessionData.employeeId || !sessionData.subLocation || !sessionData.userType) {
+                    alert("Your Session has expired. Please login again.");
+                    window.location.href = 'signin.html';
+                }
+                if (sessionData.userStatus == 'Deactivated') {
+                    alert("User Deactivated. Please login again");
+                    window.location.href = 'signin.html';
+                }
+                console.log(sessionData);
+            } catch (error) {
+                console.error('Error fetching session data:', error);
+                window.location.href = 'signin.html';
+            }
+        });
+
+        fetch('/sessionData')
+            .then(response => response.json())
+            .then(data => {
+                if (data.employeeName && data.employeeId && data.subLocation) {
+                    document.getElementById('welcomeMessage').textContent = `Hello ${data.employeeName} !!`;
+                    document.getElementById('signin').style.display = 'none';
+                    if (data.userType == 'user') {
+                        document.getElementById('ManagementOption').style.display = 'none';
+                        document.getElementById('deleteOption').style.display = 'none';
+                    }
+                    else {
+                        document.getElementById('ManagementOption').style.display = 'block';
+                        document.getElementById('deleteOption').style.display = 'block';
+                    }
+                }
+                else {
+                    document.getElementById('welcomeMessage').textContent = 'Hello Guest!';
+                }
+            })
+            .catch(err => console.error('Error fetching session data:', err));
+
+        document.getElementById('skipperLogo').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+        document.getElementById('addUser').addEventListener('click', function () {
+            window.location.href = 'registration.html';
+        });
+        document.getElementById('addAsset').addEventListener('click', function () {
+            window.location.href = 'addAsset.html';
+        });
+        document.getElementById('searchAsset').addEventListener('click', function () {
+            window.location.href = 'searchAsset.html';
+        });
+        document.getElementById('displayAsset').addEventListener('click', function () {
+            window.location.href = 'displayAssets.html';
+        });
+        document.getElementById('updateAsset').addEventListener('click', function () {
+            window.location.href = 'updateAsset.html';
+        });
+        document.getElementById('deleteAsset').addEventListener('click', function () {
+            window.location.href = 'deleteAsset.html';
+        });
+
+        var IdealTimeOut = 100;
+        var idleSecondsTimer = null;
+        var idleSecondsCounter = 0;
+        document.onclick = function () { idleSecondsCounter = 0; };
+        document.onmousemove = function () { idleSecondsCounter = 0; };
+        document.onkeypress = function () { idleSecondsCounter = 0; };
+        idleSecondsTimer = window.setInterval(CheckIdleTime, 1000);
+
+        function CheckIdleTime() {
+            idleSecondsCounter++;
+            var oPanel = document.getElementById("timeOut");
+            if (oPanel) {
+                oPanel.innerHTML = (IdealTimeOut - idleSecondsCounter);
+            }
+            if (idleSecondsCounter >= IdealTimeOut) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                alert("Your Session has expired. Please login again.");
+                window.location.href = "signin.html";
+            }
+        }
+
+        document.addEventListener("visibilitychange", function () {
+            if (idleSecondsCounter >= 80) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                window.location.href = "signin.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

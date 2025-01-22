@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Asset</title>
+    <link rel="stylesheet" href="./demo.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="./logoSkipper.png" alt="Skipper logo" id="skipperLogo">
+            <h1>Welcome to Skipper's Asset Management Portal</h1>
+            <i class="fa fa-home" id="home"></i>
+        </header>
+
+        <main>
+            <section class="tabs">
+                <div id="searchTab" class="tab active-tab" onclick="showForm('searchForm')">Search Asset</div>
+                <div id="updateTab" class="tab" onclick="showForm('updateForm')">Update Asset</div>
+                <div id="issueTab" class="tab" onclick="showForm('issueForm')">Issue Asset</div>
+            </section>
+
+            <section id="searchFormSection" class="form-section active-form">
+                <form id="searchForm" autocomplete="off">
+                    <h2>Search For an Asset</h2>
+                    <label for="assetSerialNumber">Enter Asset Serial Number:</label>
+                    <input type="text" class="uppercase" id="assetSerialNumber" placeholder="Enter Asset Serial Number"
+                        required>
+
+                    <div style="margin-bottom: 20px;">
+                        <label for="searchField">Select Search Field:</label>
+                        <select id="searchField" name="searchField" data-dropup-auto="false" required>
+                            <!-- options... -->
+                        </select>
+                    </div>
+                    <button type="submit">Search</button>
+                </form>
+                <div id="result"></div>
+            </section>
+
+            <section id="updateFormSection" class="form-section">
+                <form id="updateForm" autocomplete="off">
+                    <h2>Update an Asset</h2>
+                    <label for="_assetSerialNumber">Asset Serial Number:</label>
+                    <input type="text" class="uppercase" id="_assetSerialNumber" name="_assetSerialNumber"
+                        placeholder="Enter Asset Serial Number" required>
+
+                    <div id="fieldsContainer" style="margin-bottom: 15px;">
+                        <label for="fieldName">Field Name:</label>
+                        <select name="fieldName[]" data-dropup-auto="false" required>
+                            <!-- options... -->
+                        </select>
+
+                        <label for="fieldValue">Field Value:</label>
+                        <input type="text" class="uppercase" name="fieldValue[]" placeholder="Enter Field Value"
+                            required>
+                    </div>
+
+                    <button type="button" onclick="addField()">Add Another Field</button>
+                    <button type="button" onclick="updateAsset()">Submit</button>
+                    <div class="message" id="message"></div>
+                </form>
+            </section>
+
+            <section id="issueFormSection" class="form-section">
+                <form id="issueForm" autocomplete="off">
+                    <h2>Issue an Asset</h2>
+                    <label for="__assetSerialNumber">Asset Serial Number:</label>
+                    <input type="text" class="uppercase" id="__assetSerialNumber"
+                        placeholder="Enter Asset Serial Number" required>
+
+                    <label for="__employeeId">Employee Id:</label>
+                    <input type="text" class="uppercase" id="__employeeId" placeholder="Enter Employee Id" required>
+
+                    <label for="__username">Employee Name:</label>
+                    <input type="text" class="uppercase" id="__username" placeholder="Enter Username" required>
+                    <button type="submit">Submit</button>
+                    <div class="message" id="_message"></div>
+                </form>
+            </section>
+
+        </main>
+
+        <footer>
+            <div id="timemssge">
+                You will be auto logged out in <span id="timeOut"></span> seconds.
+            </div>
+            <p>&copy; 1981 Skipper Limited</p>
+        </footer>
+    </div>
+
+    <script>
+        var employeeName, subLocation, userType, userStatus, sessionStatus;
+        const searchForm = document.getElementById("searchForm");
+        const issueForm = document.getElementById("issueForm");
+        const resultDiv = document.getElementById("result");
+
+        document.getElementById('skipperLogo').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+        document.getElementById('home').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+
+        // Switch between forms
+        function showForm(formId) {
+            // Hide all forms
+            const forms = document.querySelectorAll('.form-section');
+            forms.forEach(form => form.classList.remove('active-form'));
+
+            // Show selected form
+            document.getElementById(formId + 'Section').classList.add('active-form');
+
+            // Set active tab
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active-tab'));
+            document.getElementById(formId + 'Tab').classList.add('active-tab');
+        }
+
+        // Add more fields for updating asset
+        function addField() {
+            const container = document.getElementById('fieldsContainer');
+            // Field creation logic...
+        }
+
+        // Handle form submission
+        async function updateAsset() {
+            // Form update logic...
+        }
+
+        // Handle session timeouts and other logic...
+    </script>
+</body>
+
+</html>

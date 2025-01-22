@@ -1,0 +1,249 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    background-color: #284a6d;
+    color: white;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+#skipperLogo {
+    max-width: 150px;
+    max-height: 150px;
+    align-items: center;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+
+#home
+{
+   font-size: 25px;
+   cursor: pointer;
+}
+
+main {
+    max-width: 800px;
+    margin: auto auto;
+    padding: 20px;
+}
+
+/* Tab Styling */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+    padding: 15px 30px;
+    margin: 0 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: #ffffff;
+    color:  #007bff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect with scale and shadow */
+.tab:hover {
+    background-color: #ffffff;
+    color:  #007bff;
+    transform: translateY(-2px) scale(1.05); /* Added scale effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+h3 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #333;
+}
+
+.form-section {
+    display: none;
+    margin-top: 20px;
+}
+
+.active-form {
+    display: block;
+}
+
+.active-tab
+{
+    background-color: #0c4587c4;
+    color: white;
+}
+/* Tab Styling */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(236, 232, 232, 0.619);
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="checkbox"],
+input[type="number"]
+ {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.uppercase
+{
+  text-transform: uppercase;
+}
+
+select {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button {
+    text-align: center;
+    padding: 12px 20px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+    max-width: 250px;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #004085;
+    transform: translateY(0);
+}
+
+.column-selection {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#result {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+}
+
+th,
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+td {
+    background-color: white;
+    color: #333
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+#timemssge {
+    margin-bottom: 5px;
+}
+
+#timeOut {
+    background-color: yellow;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+#fieldsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}

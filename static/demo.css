@@ -1,0 +1,176 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Header Styling */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 2px solid #ddd;
+}
+
+#skipperLogo {
+    width: 120px;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Tab Styling */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+    padding: 15px 30px;
+    margin: 0 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #4CAF50;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect with scale and shadow */
+.tab:hover {
+    background-color: #0e0d0d;
+    color: white;
+    transform: translateY(-2px) scale(1.05); /* Added scale effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+/* Form Sections */
+.form-section {
+    display: none;
+    margin-top: 20px;
+}
+
+.active-form {
+    display: block;
+}
+
+form {
+    background: rgba(236, 232, 232, 0.619);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+form h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
+    display: block;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fafafa;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #4CAF50;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Button Styling */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    margin-top: 10px; /* Spacing between form fields */
+    margin-bottom: 20px; /* More space below button */
+    padding: 15px 35px; /* Increased padding for better clickability */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    font-size: 16px; /* Adjust font size for better readability */
+}
+
+/* Button Hover Effects */
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    border-top: 2px solid #ddd;
+    color: #777;
+}
+
+#timemssge {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab {
+        margin-bottom: 10px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    form {
+        padding: 20px;
+    }
+}

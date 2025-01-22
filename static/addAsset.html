@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Asset</title>
+    <link rel="stylesheet" href="./styles_addAsset.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="./logoSkipper.png" alt="Skipper logo" id="skipperLogo">
+            <h1>Welcome to Skipper's Asset Management Portal</h1>
+            <i class="fa fa-home" id="home"></i>
+        </header>
+        <main>
+            <section class="form-section">
+
+                <form id="assetForm" autocomplete="off">
+                    <h3>Add New Asset</h3>
+
+                    <label for="location">Location:</label>
+                    <select name="location" id="location">
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Tirumala Office" selected>Tirumala Office</option>
+                        <option value="Guwahati">Guwahati</option>
+                        <option value="New Delhi">New Delhi</option>
+                    </select>
+
+
+                    <label for="subLocation">Sub Location:</label>
+                    <select name="subLocation" id="subLocation">
+                        <option value="Tirumala Office" selected>Tirumala Office</option>
+                        <option value="Saltlake">Saltlake</option>
+                        <option value="New Delhi">New Delhi</option>
+                        <option value="Morigaon JJM">Morigaon JJM</option>
+                        <option value="Ahmedabad">Ahmedabad</option>
+                        <option value="Head Office">Head Office</option>
+                        <option value="Uluberia Plant">Uluberia Plant</option>
+                        <option value="BCTL UNIT">BCTL UNIT</option>
+                        <option value="Jangalpur Plant">Jangalpur Plant</option>
+                        <option value="Guwahati Plant">Guwahati Plant</option>
+                        <option value="Others">Others</option>
+                    </select>
+
+
+                    <label for="otherLocation" class="others" style="display: none;">Please specify the Sub
+                        Location:</label>
+                    <input type="text" class="others" name="otherLocation" id="otherLocation" style="display: none;">
+
+
+                    <label for="status" style="display: none;">Status:</label>
+                    <select name="status" style="display: none;" id="status">
+                        <option value="In stock" selected>In Stock</option>
+                        <option value="Issued">Issued</option>
+                        <option value="Scrapped">Scrapped</option>
+                    </select>
+
+
+                    <label for="employeeId" style="display: none;">Employee Id:</label>
+                    <input type="text" class="uppercase" id="employeeId" placeholder="Enter Employee Id"
+                        style="display: none;">
+
+                    <label for="username" style="display: none;">Username:</label>
+                    <input type="text" class="uppercase" id="username" placeholder="Enter Username"
+                        style="display: none;">
+
+                    <label for="assetType">Asset Type:</label>
+                    <select name="assetType" id="assetType">
+                        <option value="Laptop" selected>Laptop</option>
+                        <option value="Desktop">Desktop</option>
+                        <option value="Server">Server</option>
+                        <option value="Keyboard">Keyboard</option>
+                        <option value="Mouse">Mouse</option>
+                        <option value="Network rack">Network Rack</option>
+                        <option value="EPABX">EPABX</option>
+                        <option value="ConferencePhone">Conference Phone</option>
+                        <option value="Base Phone">Base Phone</option>
+                        <option value="NVME">NVME</option>
+                        <option value="SSD">SSD</option>
+                        <option value="HDD">HDD</option>
+                        <option value="LED monitor">LED Monitor</option>
+                        <option value="Access point">Access point</option>
+                        <option value="Firewall">Firewall</option>
+                        <option value="Video Conferencing System">Video Conferencing System</option>
+                        <option value="POE">POE</option>
+                        <option value="Network switch">Network Switch</option>
+                        <option value="NAS drive">NAS Drive</option>
+                        <option value="Server">Server</option>
+                        <option value="Barcode scanner">Barcode Scanner</option>
+                        <option value="Printer">Printer</option>
+                        <option value="UPS">UPS</option>
+                        <option value="NVR">NVR</option>
+                        <option value="CCTV">CCTV</option>
+                        <option value="Software">Software</option>
+                        <option value="Accessories">Accessories</option>
+                    </select>
+
+                    <label for="assetMake">Asset Make:</label>
+                    <input type="text" class="uppercase" id="assetMake" placeholder="Enter Asset Make" required>
+
+                    <label for="assetSerialNumber">Asset Serial Number:</label>
+                    <input type="text" class="uppercase" id="assetSerialNumber" placeholder="Enter Asset Serial Number"
+                        required>
+
+                    <label for="assetModel">Asset Model:</label>
+                    <input type="text" class="uppercase" id="assetModel" placeholder="Enter Asset Model" required>
+
+                    <label for="invoiceNumber">Invoice Number:</label>
+                    <input type="text" class="uppercase" id="invoiceNumber" placeholder="Enter Invoice Number" required>
+
+                    <label for="poNumber">PO Number:</label>
+                    <input type="text" class="uppercase" id="poNumber" placeholder="Enter PO Number" required>
+
+                    <label for="amcInvoiceNumber" style="display: none;">AMC Invoice Number:</label>
+                    <input type="text" class="uppercase" id="amcInvoiceNumber" value=""
+                        placeholder="Enter AMC Invoice Number" style="display: none;">
+
+                    <label for="warrantyStatus">Coverage:</label>
+                    <select name="warrantyStatus" id="warrantyStatus">
+                        <option value="Void" selected>Void</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="In AMC">AMC</option>
+                        <option value="In Warranty">Warranty</option>
+                    </select>
+
+                    <label for="warrantyStartDate">Warranty/AMC Start Date:</label>
+                    <input type="date" class="uppercase" id="warrantyStartDate" value="2024-09-19"
+                        placeholder="Enter Warranty Start Date" required>
+
+                    <label for="warrantyEndDate">Warranty/AMC End Date:</label>
+                    <input type="date" class="uppercase" id="warrantyEndDate" value="2024-09-19"
+                        placeholder="Enter Warranty End Date" required>
+
+                    <label for="warrantyTenure">Warranty/AMC Tenure(Years):</label>
+                    <input type="number" class="uppercase" id="warrantyTenure" placeholder="Enter Warranty Tenure"
+                        min="0" max="100" required>
+
+                    <label for="purchaseDate">Date of Purchase:</label>
+                    <input type="date" class="uppercase" id="purchaseDate" value="2024-09-19" required>
+
+                    <label for="purchaseYear">Year of Purchase:</label>
+                    <input type="number" class="uppercase" id="purchaseYear" min="1900" max="2099" step="1"
+                        placeholder="Enter Year of Purchase" required>
+
+
+                    <label for="price">Price of Asset(Rs):</label>
+                    <input type="number" class="uppercase" id="price" placeholder="Enter Price of Asset" value="0"
+                        required>
+
+                    <label for="vendorName">Vendor Name:</label>
+                    <input type="text" class="uppercase" id="vendorName" placeholder="Enter Vendor Name" required>
+
+                    <label for="contactNumber">Vendor Contact Number:</label>
+                    <input type="tel" class="uppercase" id="contactNumber" placeholder="Enter Contact Number" required>
+
+                    <label for="mailId">Vendor Mail ID:</label>
+                    <input type="email" id="mailId" value="" placeholder="abcd@gmail.com">
+
+                    <label for="processor" class="specificFeatures">Choose Processor:</label>
+                    <select name="processor" class="specificFeatures" id="processor">
+                        <option value="Not Applicable" selected>Not Applicable</option>
+                        <option value="Intel Core i3">Intel Core i3</option>
+                        <option value="Intel Core i5">Intel Core i5</option>
+                        <option value="Intel Core i7">Intel Core i7</option>
+                    </select>
+
+                    <label for="cpuSpeed" class="specificFeatures">CPU Speed(GHz):</label>
+                    <input type="number" id="cpuSpeed" placeholder="Enter CPU Speed" value="0"
+                        class="specificFeatures uppercase">
+
+                    <label for="ramInstalled" class="specificFeatures">Choose Ram Installed:</label>
+                    <select name="ramInstalled" class="specificFeatures" id="ramInstalled">
+                        <option value="Not Applicable" selected>Not Applicable</option>
+                        <option value="8 GB RAM">8 GB</option>
+                        <option value="16 GB RAM">16 GB</option>
+                        <option value="32 GB RAM">32 GB</option>
+                    </select>
+
+                    <label for="hddCapacity" class="specificFeatures">HDD/SSD Capacity(GB):</label>
+                    <input type="number" id="hddCapacity" class="specificFeatures uppercase" value="0"
+                        placeholder="Enter HDD/SSD Capacity">
+
+                    <label for="operatingSystem" class="specificFeatures">Operating System:</label>
+                    <select name="operatingSystem" class="specificFeatures" id="operatingSystem">
+                        <option value="Not Applicable" selected>Not Applicable</option>
+                        <option value="Windows 10pro">Windows 10 pro</option>
+                        <option value="Windows 11pro">Windows 11 pro</option>
+                        <option value="Windows 2016 Server Edition">Windows 2016 Server Edition</option>
+                        <option value="Windows 2019 Server Edition">Windows 2019 Server Edition</option>
+                        <option value="Windows 2022 Server Edition">Windows 2022 Server Edition</option>
+                    </select>
+
+                    <label for="osLicense" class="specificFeatures">OS Licence:</label>
+                    <input type="text" style="margin-bottom: 10px;" id="osLicense" class="specificFeatures"
+                        value="Not Applicable" placeholder="Enter OS License">
+
+                    <button type="submit">Add Asset</button>
+                </form>
+            </section>
+        </main>
+        <footer>
+            <div id="timemssge">
+                You will be auto logged out in <span id="timeOut"></span> seconds.
+            </div>
+            <p>&copy; 1981 Skipper Limited</p>
+        </footer>
+    </div>
+    <script>
+        var employeeId, employeeName, subLocation, userType, mailId;
+        document.getElementById('skipperLogo').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+        document.getElementById('home').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const sessionResponse = await fetch('/sessionData');
+                const sessionData = await sessionResponse.json();
+                employeeId = sessionData.employeeId;
+                employeeName = sessionData.employeeName;
+                subLocation = sessionData.subLocation;
+                userType = sessionData.userType;
+                userStatus = sessionData.userStatus;
+                if (!sessionData.employeeName || !sessionData.employeeId || !sessionData.subLocation || !sessionData.userType) {
+
+                    alert("Your Session has expired. Please login again.");
+                    window.location.href = 'signin.html';
+                }
+                if (userStatus == 'Deactivated') {
+
+                    alert("User Deactivated. Please login again");
+                    window.location.href = 'signin.html';
+                }
+            } catch (error) {
+                console.error('Error fetching session data:', error);
+                window.location.href = 'signin.html';
+            }
+        });
+
+        const assetType = document.getElementById("assetType");
+        const elementsToHide = document.querySelectorAll('.specificFeatures');
+
+        assetType.addEventListener('change', function () {
+            if (assetType.value === 'Laptop' || assetType.value === 'Desktop') {
+                elementsToHide.forEach(element => {
+                    element.style.display = 'block';
+                });
+            } else {
+                elementsToHide.forEach(element => {
+                    element.style.display = 'none';
+                });
+            }
+        });
+
+
+        var selectElement = document.getElementById('subLocation');
+        var otherLocationDiv = document.querySelectorAll('.others');
+        selectElement.addEventListener('change', function () {
+            if (selectElement.value === 'Others') {
+                otherLocationDiv.forEach(element => {
+                    element.style.display = 'block';
+                });
+            } else {
+                otherLocationDiv.forEach(element => {
+                    element.style.display = 'none';
+                });
+            }
+        });
+
+        var subLocation_input;
+        document.getElementById('assetForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            if (document.getElementById('subLocation').value == 'Others') {
+                subLocation_input = document.getElementById('otherLocation').value;
+            }
+            else {
+                subLocation_input = document.getElementById('subLocation').value;
+            }
+
+            var date = new Date();
+            var date_time = date.toLocaleDateString() + ' ' + date.toLocaleTimeString() + ' Created by ' + employeeName;
+
+            if (document.getElementById('mailId').value === "") {
+                mailId = "abcd@gmail.com";
+            }
+            const formData = {
+                location: document.getElementById('location').value,
+                subLocation: subLocation_input,
+                status: document.getElementById('status').value,
+                username: "",
+                employeeId: "",
+                assetType: document.getElementById('assetType').value,
+                assetMake: document.getElementById('assetMake').value,
+                assetSerialNumber: document.getElementById('assetSerialNumber').value,
+                assetModel: document.getElementById('assetModel').value,
+                invoiceNumber: document.getElementById('invoiceNumber').value,
+                poNumber: document.getElementById('poNumber').value,
+                amcInvoiceNumber: "",
+                warrantyStatus: document.getElementById('warrantyStatus').value,
+                warrantyStartDate: document.getElementById('warrantyStartDate').value,
+                warrantyEndDate: document.getElementById('warrantyEndDate').value,
+                warrantyTenure: document.getElementById('warrantyTenure').value,
+                purchaseDate: document.getElementById('purchaseDate').value,
+                purchaseYear: document.getElementById('purchaseYear').value,
+                price: document.getElementById('price').value,
+                vendorName: document.getElementById('vendorName').value,
+                contactNumber: document.getElementById('contactNumber').value,
+                mailId: document.getElementById('mailId').value,
+                processor: document.getElementById('processor').value,
+                cpuSpeed: document.getElementById('cpuSpeed').value,
+                ramInstalled: document.getElementById('ramInstalled').value,
+                hddCapacity: document.getElementById('hddCapacity').value,
+                operatingSystem: document.getElementById('operatingSystem').value,
+                osLicense: document.getElementById('osLicense').value,
+                transactionDate: date_time,
+                transactionCreatedDate: date_time
+            };
+
+            fetch('/sessionData')
+                .then(response => response.json())
+                .then(data => {
+                    if ((userType == 'admin') || (data.subLocation == document.getElementById('subLocation').value && userType == 'user')) {
+
+                        try {
+                            const response = fetch('/assets/add', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(formData)
+                            });
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                        document.getElementById('assetForm').reset();
+                    }
+                    else if (!data.subLocation) {
+                        alert("Your Session has expired. Please login again.");
+                        window.location.href = "signin.html";
+                    }
+                    else if (data.subLocation != document.getElementById('subLocation').value) {
+                        alert("You cannot insert asset of other locations, Kindly re-enter your location");
+                    }
+                    else {
+                        alert("You have entered wrong Data, Kindly check your data");
+                    }
+                })
+                .catch(err => console.error('Error fetching session data:', err));
+        });
+
+
+        var IdealTimeOut = 100;
+        var idleSecondsTimer = null;
+        var idleSecondsCounter = 0;
+        document.onclick = function () { idleSecondsCounter = 0; };
+        document.onmousemove = function () { idleSecondsCounter = 0; };
+        document.onkeypress = function () { idleSecondsCounter = 0; };
+        idleSecondsTimer = window.setInterval(CheckIdleTime, 1000);
+
+        function CheckIdleTime() {
+            idleSecondsCounter++;
+            var oPanel = document.getElementById("timeOut");
+            if (oPanel) {
+                oPanel.innerHTML = (IdealTimeOut - idleSecondsCounter);
+            }
+            if (idleSecondsCounter >= IdealTimeOut) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                alert("Your Session has expired. Please login again.");
+                window.location.href = "signin.html";
+            }
+        }
+
+        document.addEventListener("visibilitychange", function () {
+            if (idleSecondsCounter >= 80) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                window.location.href = "signin.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

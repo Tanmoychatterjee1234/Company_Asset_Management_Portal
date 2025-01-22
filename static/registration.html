@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="./registration.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="./logoSkipper.png" alt="Skipper logo" id="skipperLogo">
+            <h1>Welcome to Skipper's Asset Management Portal</h1>
+            <i class="fa fa-home" id="home"></i>
+        </header>
+        <main>
+            <section class="tabs">
+                <div id="registerTab" class="tab active-tab" onclick="showForm('registerForm')">Register User</div>
+                <div id="deleteTab" class="tab" onclick="showForm('deleteForm')">Delete User</div>
+                <div id="displayTab" class="tab" onclick="showForm('displayForm')">Display Users</div>
+            </section>
+            <section id="registerFormSection" class="form-section active-form">
+                <form id="registerForm" autocomplete="off">
+                    <h3>Register User</h3>
+
+                    <label for="employeeId"><b>Employee Id:</b></label>
+                    <input type="text" class="uppercase" placeholder="Enter your Employee Id" name="employeeId"
+                        id="employeeId" required>
+
+                    <label for="employeeName"><b>Employee Name:</b></label>
+                    <input type="text" class="uppercase" placeholder="Enter your Employee Name" name="employeeName"
+                        id="employeeName" required>
+
+                    <label for="email"><b>Employee Email:</b></label>
+                    <input type="email" placeholder="abcd@gmail.com" name="email" id="email" required>
+
+                    <label for="userType" class="specificFeatures">Choose User Type:</label>
+                    <select name="userType" class="specificFeatures" id="userType">
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+
+                    <label for="subLocation">Sub Location:</label>
+                    <select name="subLocation" id="subLocation">
+                        <option value="Tirumala Office" selected>Tirumala Office</option>
+                        <option value="Tirumala Office" selected>Tirumala Office</option>
+                        <option value="Saltlake">Saltlake</option>
+                        <option value="New Delhi">New Delhi</option>
+                        <option value="Morigaon JJM">Morigaon JJM</option>
+                        <option value="Ahmedabad">Ahmedabad</option>
+                        <option value="Head Office">Head Office</option>
+                        <option value="Uluberia Plant">Uluberia Plant</option>
+                        <option value="BCTL UNIT">BCTL UNIT</option>
+                        <option value="Jangalpur Plant">Jangalpur Plant</option>
+                        <option value="Guwahati Plant">Guwahati Plant</option>
+                        <option value="Others">Others</option>
+                    </select>
+
+                    <label for="otherLocation" class="others" style="display: none;">Please specify the Sub
+                        Location:</label>
+                    <input type="text" class="others" name="otherLocation" id="otherLocation" style="display: none;">
+
+                    <label for="pswd"><b>Password:</b></label>
+                    <div class="password-container">
+                        <input type="password" placeholder="Enter Password" name="pswd" id="pswd" required>
+                        <label style="font-size: 15px;">
+                            <input type="checkbox" id="showPassword"
+                                onclick="togglePasswordVisibility('pswd', 'showPassword')" class="column-checkbox"
+                                onchange="document.getElementById('pswd').type = this.checked ? 'text' : 'password'">
+                            Show
+                            Password
+                        </label>
+                    </div>
+
+                    <label for="confirmPswd"><b>Confirm Password:</b></label>
+                    <div class="password-container">
+                        <input type="password" placeholder="Confirm Password" name="confirmPswd" id="confirmPswd"
+                            required>
+                        <label style="font-size: 15px;">
+                            <input type="checkbox" id="showConfirmPassword"
+                                onclick="togglePasswordVisibility('confirmPswd', 'showConfirmPassword')"
+                                class="column-checkbox"
+                                onchange="document.getElementById('confirmPswd').type = this.checked ? 'text' : 'password'">
+                            Show Password
+                        </label>
+                    </div>
+
+                    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                    <button type="submit" class="registerbtn">Register</button>
+                </form>
+            </section>
+
+            <section id="deleteFormSection" class="form-section">
+                <form id="deleteForm" autocomplete="off">
+                    <h3>Delete User</h3>
+
+                    <label for="_employeeId"><b>Employee Id:</b></label>
+                    <input type="text" class="uppercase" placeholder="Enter your Employee Id" name="_employeeId" id="_employeeId"
+                        required>
+
+                    <label for="_employeeName"><b>Employee Name:</b></label>
+                    <input type="text" class="uppercase"  placeholder="Enter your Employee Name" name="_employeeName" id="_employeeName"
+                        required>
+
+                    <button type="submit" class="registerbtn">Delete User</button>
+                </form>
+            </section>
+            <section id="displayFormSection" class="form-section">
+                <form id="displayForm" autocomplete="off">
+                    <h3>Display Users</h3>
+                    <button type="submit" class="registerbtn">Display Users</button>
+                </form>
+            </section>
+        </main>
+        <div id="result"></div>
+        <footer>
+            <div id="timemssge">
+                You will be auto logged out in <span id="timeOut"></span> seconds.
+            </div>
+            <p>&copy; 1981 Skipper Limited</p>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('skipperLogo').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+        document.getElementById('home').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+        var employeeName, subLocation, userType
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const sessionResponse = await fetch('/sessionData');
+                const sessionData = await sessionResponse.json();
+                employeeName = sessionData.employeeName;
+                subLocation = sessionData.subLocation;
+                userType = sessionData.userType;
+                userStatus = sessionData.userStatus;
+                if (!sessionData.employeeName || !sessionData.employeeId || !sessionData.subLocation || !sessionData.userType) {
+
+                    alert("Your Session has expired. Please login again.");
+                    window.location.href = 'signin.html';
+                }
+                if (sessionData.userStatus == 'Deactivated') {
+
+                    alert("User Deactivated. Please login again");
+                    window.location.href = 'signin.html';
+                }
+                if (userType == 'user') {
+                    window.location.href = 'home.html';
+                }
+            } catch (error) {
+                console.error('Error fetching session data:', error);
+                window.location.href = 'signin.html';
+            }
+        });
+
+        function togglePasswordVisibility(inputId, checkboxId) {
+            const input = document.getElementById(inputId);
+            const checkbox = document.getElementById(checkboxId);
+            input.setAttribute('type', checkbox.checked ? 'text' : 'password');
+        }
+
+        function verifyPassword() {
+            const pw = document.getElementById("pswd").value;
+            const confirmPw = document.getElementById("confirmPswd").value;
+
+            if (pw === "") {
+                alert("**Fill the password please!");
+                return false;
+            }
+
+            if (pw.length < 8) {
+                alert("**Password length must be at least 8 characters");
+                return false;
+            }
+
+            if (pw.length > 12) {
+                alert("**Password length must not exceed 12 characters");
+                return false;
+            }
+
+            if (pw !== confirmPw) {
+                alert("**Passwords do not match!");
+                return false;
+            }
+
+            return true;
+        }
+
+        var selectElement = document.getElementById('subLocation');
+        var otherLocationDiv = document.querySelectorAll('.others');
+        selectElement.addEventListener('change', function () {
+            if (selectElement.value === 'Others') {
+                otherLocationDiv.forEach(element => {
+                    element.style.display = 'block';
+                });
+            } else {
+                otherLocationDiv.forEach(element => {
+                    element.style.display = 'none';
+                });
+            }
+        });
+
+        var subLocation_input;
+        document.getElementById('registerForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            if (document.getElementById('subLocation').value == 'Others') {
+                subLocation_input = document.getElementById('otherLocation').value;
+            }
+            else {
+                subLocation_input = document.getElementById('subLocation').value;
+            }
+
+            if (userType == 'admin') {
+                if (!verifyPassword()) return;
+                const formData = {
+                    employeeId: document.getElementById('employeeId').value,
+                    employeeName: document.getElementById('employeeName').value,
+                    mailId: document.getElementById('email').value,
+                    password: document.getElementById('pswd').value,
+                    userType: document.getElementById('userType').value,
+                    subLocation: subLocation_input
+                };
+                try {
+                    const response = await fetch('/registerUser', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        document.getElementById('registerForm').reset();
+                    } else {
+                        alert("Employee Id or Email Id already exists, Please Sign in");
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+        });
+
+        document.getElementById('deleteForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            if (userType == 'admin') {
+                const formData = {
+                    employeeId: document.getElementById('_employeeId').value,
+                    employeeName: document.getElementById('_employeeName').value
+                };
+                try {
+                    const response = await fetch('/deleteUser', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    const result = await response.json();
+                    if (response.ok) {
+                        document.getElementById('deleteForm').reset();
+                    } else {
+                        alert("User does not exist");
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+        });
+
+        document.getElementById('displayForm').addEventListener('submit', async function (event) {
+
+            event.preventDefault();
+
+            try {
+                const response = await fetch('/users/display', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+
+                const data = await response.json();
+                console.log(data);
+
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '';
+
+                if (response.ok) {
+                    if (data.length > 0) {
+                        let tableHTML = `
+                            <table>
+                                <thead>
+                                    <tr>
+                        `;
+
+                        tableHTML += `<th>Employee Id</th>`;
+                        tableHTML += `<th>Employee Name</th>`;
+                        tableHTML += `<th>Email Id</th>`;
+                        tableHTML += `<th>User Type</th>`;
+                        tableHTML += `<th>Sub Location</th>`;
+                        tableHTML += `<th>User Status</th>`;
+
+                        tableHTML += `
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+
+                        data.forEach(user => {
+                            tableHTML += '<tr>';
+                            tableHTML += `<td>${user.employeeId || '0'}</td>`;
+                            tableHTML += `<td>${user.employeeName || '0'}</td>`;
+                            tableHTML += `<td>${user.mailId || '0'}</td>`;
+                            tableHTML += `<td>${user.userType || '0'}</td>`;
+                            tableHTML += `<td>${user.subLocation || '0'}</td>`;
+                            tableHTML += `<td>${user.userStatus || '0'}</td>`;
+                            tableHTML += '</tr>';
+                        });
+
+                        tableHTML += `
+                                </tbody>
+                            </table>
+                        `;
+                        resultDiv.innerHTML = tableHTML;
+                    } else {
+                        resultDiv.innerHTML = '<p>No users found.</p>';
+                    }
+                } else {
+                    resultDiv.innerHTML = `<p>${data.message || 'Failed to fetch user details.'}</p>`;
+                }
+            }
+            catch (error) {
+                console.error('Error fetching user:', error);
+                document.getElementById('result').innerHTML = '<p>Failed to fetch user details.</p>';
+            }
+        });
+
+        // Switch between forms
+        function showForm(formId) {
+            // Hide all forms
+            const forms = document.querySelectorAll('.form-section');
+            forms.forEach(form => form.classList.remove('active-form'));
+
+            // Show selected form
+            document.getElementById(formId + 'Section').classList.add('active-form');
+
+            // Set active tab
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active-tab'));
+            var activeTab = "";
+            if (formId == 'registerForm') {
+                activeTab = "registerTab";
+                document.getElementById("result").style.display = "none"
+            }
+            else if (formId == 'deleteForm') {
+                activeTab = "deleteTab";
+                document.getElementById("result").style.display = "none"
+            }
+            else if (formId == 'displayForm') {
+                activeTab = "displayTab";
+                document.getElementById("result").style.display = "block";
+            }
+            document.getElementById(activeTab).classList.add('active-tab');
+        }
+
+
+        var IdealTimeOut = 100;
+        var idleSecondsTimer = null;
+        var idleSecondsCounter = 0;
+        document.onclick = function () { idleSecondsCounter = 0; };
+        document.onmousemove = function () { idleSecondsCounter = 0; };
+        document.onkeypress = function () { idleSecondsCounter = 0; };
+        idleSecondsTimer = window.setInterval(CheckIdleTime, 1000);
+
+        function CheckIdleTime() {
+            idleSecondsCounter++;
+            var oPanel = document.getElementById("timeOut");
+            if (oPanel) {
+                oPanel.innerHTML = (IdealTimeOut - idleSecondsCounter);
+            }
+            if (idleSecondsCounter >= IdealTimeOut) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                alert("Your Session has expired. Please login again.");
+                window.location.href = "signin.html";
+            }
+        }
+
+        document.addEventListener("visibilitychange", function () {
+            if (idleSecondsCounter >= 80) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                window.location.href = "signin.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

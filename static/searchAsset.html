@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Asset</title>
+    <link rel="stylesheet" href="./styles_searchAsset.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="./logoSkipper.png" alt="Skipper logo" id="skipperLogo">
+            <h1>Welcome to Skipper's Asset Management Portal</h1>
+            <i class="fa fa-home" id="home"></i>
+        </header>
+        <main>
+            <section class="form-section">
+                <form id="searchForm" autocomplete="off">
+                    <h3>Search For an Asset</h3>
+                    <label for="searchField">Select Search Field:</label>
+                    <select id="searchField" name="searchField" required>
+                        <option value="location">Location</option>
+                        <option value="subLocation">Sub Location</option>
+                        <option value="status">Status</option>
+                        <option value="username">Username</option>
+                        <option value="employeeId">Employee ID</option>
+                        <option value="assetType">Asset Type</option>
+                        <option value="assetMake">Asset Make</option>
+                        <option value="assetSerialNumber">Asset Serial Number</option>
+                        <option value="assetModel">Asset Model</option>
+                        <option value="invoiceNumber">Invoice Number</option>
+                        <option value="poNumber">PO Number</option>
+                        <option value="amcInvoiceNumber">AMC Invoice Number</option>
+                        <option value="warrantyStatus">Warranty Status</option>
+                        <option value="warrantyStartDate">Warranty Start Date</option>
+                        <option value="warrantyEndDate">Warranty End Date</option>
+                        <option value="warrantyTenure">Warranty Tenure(Years)</option>
+                        <option value="purchaseDate">Purchase Date</option>
+                        <option value="purchaseYear">Purchase Year</option>
+                        <option value="price">Price of Asset(Rs)</option>
+                        <option value="vendorName">Vendor Name</option>
+                        <option value="contactNumber">Vendor Contact Number</option>
+                        <option value="mailId">Vendor Mail ID</option>
+                        <option value="processor">Processor</option>
+                        <option value="cpuSpeed">CPU Speed</option>
+                        <option value="ramInstalled">Ram Installed</option>
+                        <option value="hddCapacity">HDD/SSD Capacity(GB)</option>
+                        <option value="operatingSystem">Operating System</option>
+                        <option value="osLicense">OS Licence</option>
+                    </select>
+                    <label for="searchValue">Enter Value:</label>
+                    <input type="text" class="uppercase" id="searchValue" name="searchValue" placeholder="Enter Value"
+                        required>
+                    <div class="column-selection" style="margin-bottom: 10px;">
+                        <h4>Select Columns to Display:</h4>
+                        <div class="checkbox-group">
+
+                            <label><input type="checkbox" class="column-checkbox" value="location" checked>
+                                Location</label>
+                            <label><input type="checkbox" class="column-checkbox" value="subLocation">
+                                Sub-Location</label>
+                            <label><input type="checkbox" class="column-checkbox" value="status" checked> Status</label>
+                            <label><input type="checkbox" class="column-checkbox" value="username"> Username</label>
+                            <label><input type="checkbox" class="column-checkbox" value="employeeId" checked> Employee
+                                ID</label>
+                            <label><input type="checkbox" class="column-checkbox" value="assetType" checked> Asset
+                                Type</label>
+                            <label><input type="checkbox" class="column-checkbox" value="assetMake"> Asset Make</label>
+                            <label><input type="checkbox" class="column-checkbox" value="assetSerialNumber" checked>
+                                Asset Serial Number</label>
+                            <label><input type="checkbox" class="column-checkbox" value="assetModel"> Asset
+                                Model</label>
+                            <label><input type="checkbox" class="column-checkbox" value="invoiceNumber"> Invoice
+                                Number</label>
+                            <label><input type="checkbox" class="column-checkbox" value="poNumber"> PO Number</label>
+                            <label><input type="checkbox" class="column-checkbox" value="amcInvoiceNumber"> AMC Invoice
+                                Number</label>
+                            <label><input type="checkbox" class="column-checkbox" value="warrantyStatus">
+                                Warranty
+                                Status</label>
+                            <label><input type="checkbox" class="column-checkbox" value="warrantyStartDate">
+                                Warranty Start Date</label>
+                            <label><input type="checkbox" class="column-checkbox" value="warrantyEndDate"> Warranty
+                                End Date</label>
+                            <label><input type="checkbox" class="column-checkbox" value="warrantyTenure"> Warranty
+                                Tenure</label>
+                            <label><input type="checkbox" class="column-checkbox" value="purchaseDate" checked> Purchase
+                                Date</label>
+                            <label><input type="checkbox" class="column-checkbox" value="purchaseYear"> Purchase
+                                Year</label>
+                            <label><input type="checkbox" class="column-checkbox" value="price"> Price</label>
+                            <label><input type="checkbox" class="column-checkbox" value="vendorName"> Vendor
+                                Name</label>
+                            <label><input type="checkbox" class="column-checkbox" value="contactNumber"> Vendor
+                                Contact Number</label>
+                            <label><input type="checkbox" class="column-checkbox" value="mailId"> Vendor Mail
+                                Id</label>
+                            <label><input type="checkbox" class="column-checkbox" value="processor">
+                                Processor</label>
+                            <label><input type="checkbox" class="column-checkbox" value="cpuSpeed"> CPU
+                                Speed</label>
+                            <label><input type="checkbox" class="column-checkbox" value="ramInstalled"> Ram
+                                Installed</label>
+                            <label><input type="checkbox" class="column-checkbox" value="hddCapacity"> HDD/SSD
+                                Capacity</label>
+                            <label><input type="checkbox" class="column-checkbox" value="operatingSystem"> Operating
+                                System</label>
+                            <label><input type="checkbox" class="column-checkbox" value="osLicense"> OS
+                                Licence</label>
+                            <label><input type="checkbox" class="column-checkbox" value="transactionDate"> Transaction
+                                Date</label>
+                            <label><input type="checkbox" class="column-checkbox" value="transactionCreatedDate">
+                                Transaction
+                                Created Date</label>
+                        </div>
+                        <p class="column-limit-warning">You can view a maximum of 6 columns.</p>
+                    </div>
+                    <button type="submit" style="margin: 10px;">Search</button>
+                </form>
+            </section>
+        </main>
+        <div id="result"></div>
+        <footer>
+            <div id="timemssge">
+                You will be auto logged out in <span id="timeOut"></span> seconds.
+            </div>
+            <p>&copy; 1981 Skipper Limited</p>
+        </footer>
+    </div>
+
+    <script>
+        var employeeName, subLocation, userType;
+        document.getElementById('skipperLogo').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+        document.getElementById('home').addEventListener('click', function () {
+            window.location.href = 'home.html';
+        });
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const sessionResponse = await fetch('/sessionData');
+                const sessionData = await sessionResponse.json();
+                employeeName = sessionData.employeeName;
+                subLocation = sessionData.subLocation;
+                userType = sessionData.userType;
+                userStatus = sessionData.userStatus;
+                if (!sessionData.employeeName || !sessionData.employeeId || !sessionData.subLocation || !sessionData.userType) {
+
+                    alert("Your Session has expired. Please login again.");
+                    window.location.href = 'signin.html';
+                }
+                if (userStatus == 'Deactivated') {
+
+                    alert("User Deactivated. Please login again");
+                    window.location.href = 'signin.html';
+                }
+            } catch (error) {
+                console.error('Error fetching session data:', error);
+                window.location.href = 'signin.html';
+            }
+        });
+
+        document.getElementById('searchForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const searchField = document.getElementById('searchField').value;
+            const searchValue = document.getElementById('searchValue').value;
+            const selectedColumns = Array.from(document.querySelectorAll('.column-checkbox:checked')).map(checkbox => checkbox.value);
+
+            try {
+                const response = await fetch('/assets/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ [searchField]: searchValue })
+                });
+                if (selectedColumns.length > 6) {
+                    alert("You can view a maximum of 6 columns. Please de-select some columns");
+                    throw error;
+                }
+
+
+                const data = await response.json();
+
+
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '';
+
+                if (response.ok) {
+                    if (data.length > 0) {
+                        let tableHTML = `
+                            <table>
+                                <thead>
+                                    <tr>
+                        `;
+
+                        selectedColumns.forEach(column => {
+                            tableHTML += `<th>${column.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</th>`;
+                        });
+
+                        tableHTML += `
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+
+                        data.forEach(asset => {
+                            tableHTML += '<tr>';
+                            selectedColumns.forEach(column => {
+                                tableHTML += `<td>${asset[column] || ''}</td>`;
+                            });
+                            tableHTML += '</tr>';
+                        });
+
+                        tableHTML += `
+                                </tbody>
+                            </table>
+                        `;
+                        resultDiv.innerHTML = tableHTML;
+                    } else {
+                        resultDiv.innerHTML = '<p>No asset found with this search criteria.</p>';
+                    }
+                    document.getElementById('searchForm').reset();
+                } else {
+                    resultDiv.innerHTML = `<p>${data.message || 'Failed to fetch asset details.'}</p>`;
+                }
+            } catch (error) {
+                console.error('Error fetching asset:', error);
+                document.getElementById('result').innerHTML = '<p>Failed to fetch asset details.</p>';
+            }
+        });
+
+
+        // const searchFieldElement = document.getElementById('searchField');
+        // const searchValueElement = document.getElementById('searchValue');
+        // searchFieldElement.addEventListener('change', function () {
+        //     const searchField = searchFieldElement.value;
+        //     if (searchField === 'warrantyStartDate' || searchField === 'warrantyEndDate' || searchField === 'purchaseDate') {
+        //         searchValueElement.setAttribute('type', 'date');
+        //     }
+        //     else if (searchField === 'price') {
+        //         searchValueElement.setAttribute('type', 'number');
+        //     }
+        //     else if (searchField === 'contactNumber') {
+        //         searchValueElement.setAttribute('type', 'tel');
+        //     }
+        //     else if (searchField === 'mailId') {
+        //         searchValueElement.setAttribute('type', 'email');
+        //     }
+        //     else {
+        //         searchValueElement.setAttribute('type', 'text');
+        //     }
+        // });
+
+        var IdealTimeOut = 100;
+        var idleSecondsTimer = null;
+        var idleSecondsCounter = 0;
+        document.onclick = function () { idleSecondsCounter = 0; };
+        document.onmousemove = function () { idleSecondsCounter = 0; };
+        document.onkeypress = function () { idleSecondsCounter = 0; };
+        idleSecondsTimer = window.setInterval(CheckIdleTime, 1000);
+
+        function CheckIdleTime() {
+            idleSecondsCounter++;
+            var oPanel = document.getElementById("timeOut");
+            if (oPanel) {
+                oPanel.innerHTML = (IdealTimeOut - idleSecondsCounter);
+            }
+            if (idleSecondsCounter >= IdealTimeOut) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                alert("Your Session has expired. Please login again.");
+                window.location.href = "signin.html";
+            }
+        }
+
+        document.addEventListener("visibilitychange", function () {
+            if (idleSecondsCounter >= 80) {
+                fetch('/logout')
+                    .then(response => response.json())
+                    .catch(err => console.error('Error destroying session data:', err));
+                window.clearInterval(idleSecondsTimer);
+                window.location.href = "signin.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

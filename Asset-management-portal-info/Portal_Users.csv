@@ -1,0 +1,4 @@
+employeeId,employeeName,password,mailId,userType,subLocation,userStatus,userModifiedDate,sessionStatus
+SKPL7900,Tanmoy,7.2654E+192,dewdd@gmail.com,user,Tirumala Office,Activated,10/29/2024 11:15:01 AM Created by Anuj,Inactive
+SKPL7901,Anupama,7.2654E+192,raghavChatt123@gmail.com,admin,Tirumala Office,Deactivated,10/29/2024 2:56:30 PM Deleted by Anuj,Inactive
+SKPL7924,Anuj,7.2654E+192,abcde@gmail.com,admin,Tirumala Office,Activated,10/29/2024 11:15:01 AM Created by Anuj,Active
